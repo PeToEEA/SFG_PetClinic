@@ -29,19 +29,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 									
 	}
 	
-	/*
-	@Bean
-	@Override
-	public UserDetailsService userDetailsService() {
-		UserDetails user = userDetailsService = 
-				User.withDefaultPasswordEncoder()
-					.username("John")
-					.password("1234")
-					.roles("USER")
-					.build();
-		
-		return new InMemoryUserDetailsManager(user);
-	}
-	*/
-	
 }
