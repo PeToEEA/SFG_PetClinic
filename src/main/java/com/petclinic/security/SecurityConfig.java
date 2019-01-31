@@ -15,10 +15,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/css/**", "/", "/index").permitAll()
 								.antMatchers("/member/**").hasRole("USER")
+								.antMatchers("/h2-console/**").permitAll()
 								.and()
 								.formLogin().loginPage("/login").failureUrl("/login-error");
-		
-		
+		//For H2 db console
+		http.csrf().disable();
+		http.headers().frameOptions().disable();		
 	}
 	
 	@Autowired
