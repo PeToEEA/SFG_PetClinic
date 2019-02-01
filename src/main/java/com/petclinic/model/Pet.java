@@ -4,7 +4,12 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,6 +39,7 @@ public class Pet {
 	private LocalDate birthDate;
 	
 	@NotNull
+	@Enumerated(EnumType.STRING)
 	private PetType type;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
@@ -43,6 +49,18 @@ public class Pet {
 	@JoinColumn(name="pet_id")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Set<Visit> visits = new HashSet<>();
+	
+	public Pet() {
+		
+	}
+
+	public Pet(@NotNull String name, LocalDate birthDate, @NotNull PetType type, Owner owner) {
+		super();
+		this.name = name;
+		this.birthDate = birthDate;
+		this.type = type;
+		this.owner = owner;
+	}
 
 	public Long getId() {
 		return id;

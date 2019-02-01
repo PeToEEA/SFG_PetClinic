@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,6 +35,7 @@ public class Visit {
 	private LocalDateTime realDateTime;
 	
 	@NotNull
+	@Enumerated(EnumType.STRING)
 	private VisitType visitType = VisitType.OTHER;
 	
 	@ManyToOne
@@ -42,6 +45,17 @@ public class Visit {
 	@JoinTable(name="doctor_visit", joinColumns = @JoinColumn(name = "visit_id"),
 	inverseJoinColumns = @JoinColumn(name="doctor_id"))
 	private Set<Doctor> doctors = new HashSet<>();
+
+	public Visit() {
+		
+	}
+	
+	public Visit(LocalDateTime scheduledDateTime, @NotNull VisitType visitType, Pet pet) {
+		super();
+		this.scheduledDateTime = scheduledDateTime;
+		this.visitType = visitType;
+		this.pet = pet;
+	}
 
 	public Long getId() {
 		return id;

@@ -12,7 +12,11 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+import org.springframework.lang.Nullable;
 
 import com.petclinic.doctor.Specialization;
 
@@ -20,6 +24,9 @@ import com.petclinic.doctor.Specialization;
 public class Doctor extends Owner {
 
 	@ManyToMany(cascade = CascadeType.DETACH)
+	@JoinTable(name = "doctor_visit", joinColumns = @JoinColumn(name = "doctor_id"),
+			inverseJoinColumns = @JoinColumn(name="visit_id"))
+	@Nullable
 	private Set<Visit> visits = new HashSet<>();
 	
 	@ElementCollection(fetch = FetchType.EAGER, targetClass = Specialization.class)
