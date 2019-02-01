@@ -35,4 +35,21 @@ public class Doctor extends Owner {
 	public Doctor(String firstName, String lastName, LocalDate registrationDate, String passwordHash) {
 		super(firstName, lastName, registrationDate, passwordHash);
 	}
+
+	public Set<Visit> getVisits() {
+		return visits;
+	}
+
+	public void setVisits(Set<Visit> visits) {
+		this.visits = visits;
+	}
+
+	public Set<Specialization> getSpecializations() {
+		return specializations;
+	}
+
+	public void setSpecializations(Set<Specialization> specializations) {
+		this.specializations = specializations;
+	}
+	
 }

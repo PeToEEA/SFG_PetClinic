@@ -43,4 +43,52 @@ public class Visit {
 	inverseJoinColumns = @JoinColumn(name="doctor_id"))
 	private Set<Doctor> doctors = new HashSet<>();
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public LocalDateTime getScheduledDateTime() {
+		return scheduledDateTime;
+	}
+
+	public void setScheduledDateTime(LocalDateTime scheduledDateTime) {
+		this.scheduledDateTime = scheduledDateTime;
+	}
+
+	public LocalDateTime getRealDateTime() {
+		return realDateTime;
+	}
+
+	public void setRealDateTime(LocalDateTime realDateTime) {
+		this.realDateTime = realDateTime;
+	}
+
+	public VisitType getVisitType() {
+		return visitType;
+	}
+
+	public void setVisitType(VisitType visitType) {
+		this.visitType = visitType;
+	}
+
+	public Pet getPet() {
+		return pet;
+	}
+
+	public void setPet(Pet pet) {
+		this.pet = pet;
+	}
+
+	public Set<Doctor> getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(Set<Doctor> doctors) {
+		this.doctors = doctors;
+	}
+
 }
