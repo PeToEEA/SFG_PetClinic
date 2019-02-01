@@ -5,7 +5,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import com.petclinic.model.Doctor;
 import com.petclinic.model.Member;
+import com.petclinic.model.Owner;
 import com.petclinic.model.Role;
 import com.petclinic.repositories.MemberRepository;
 import com.petclinic.repositories.RoleRepository;
@@ -33,10 +35,10 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
 		Role memberRole = new Role("MEMBER", "standard member");
 		Role adminRole = new Role("ADMIN", "administrator role");	
 		
-		Member owner1 = new Member("Jon", "Snow", LocalDate.now(), "1234");
+		Owner owner1 = new Owner("Jon", "Snow", LocalDate.now(), "1234");
 		owner1.getRoles().add(memberRole);
 		
-		Member doctor1 = new Member("Leonard", "McCoy", LocalDate.now(), "abcd");
+		Doctor doctor1 = new Doctor("Leonard", "McCoy", LocalDate.now(), "abcd");
 		doctor1.getRoles().add(memberRole);
 		doctor1.getRoles().add(adminRole);
 		

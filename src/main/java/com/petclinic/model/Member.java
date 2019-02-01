@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.lang.Nullable;
 
 @Entity
 public class Member {
@@ -20,14 +23,38 @@ public class Member {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@NotNull
 	private String firstName;
+	
+	@NotNull
 	private String lastName;
+	
+	@NotNull
 	private LocalDate registrationDate;
 	
-	private String passwordHash;
+	@Nullable
+	private String phone;
 	
+	@Nullable
+	private String email;
+	
+	@Nullable
+	private String address;
+	
+	@Nullable
+	private String city;
+	
+	@Nullable
+	private String country;
+	
+	@Nullable
+	private String postalCode;
+	
+	@NotNull
+	private String passwordHash;
+
 	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="members_in_roles", joinColumns = @JoinColumn(name = "member_id"),
+	@JoinTable(name="member_role", joinColumns = @JoinColumn(name = "member_id"),
 	inverseJoinColumns = @JoinColumn(name="role_id"))
 	private Set<Role> roles = new HashSet<>();
 	
@@ -89,6 +116,54 @@ public class Member {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
 	}
 	
 }
