@@ -25,7 +25,7 @@ import com.petclinic.visit.VisitType;
 public class Visit {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
 	@Nullable

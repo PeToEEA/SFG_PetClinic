@@ -14,13 +14,13 @@ import javax.persistence.ManyToMany;
 public class Role {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
 	private String roleName;
 	private String description;
 	
-	@ManyToMany(mappedBy="roles", cascade=CascadeType.ALL)
+	@ManyToMany(mappedBy="roles", cascade=CascadeType.MERGE)
 	private Set<Member> members = new HashSet<>();
 	
 	public Role() {

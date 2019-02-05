@@ -20,7 +20,7 @@ import org.springframework.lang.Nullable;
 public class Member {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
 	@NotNull
@@ -51,9 +51,12 @@ public class Member {
 	private String postalCode;
 	
 	@NotNull
-	private String passwordHash;
+	private String password;
+	
+	@NotNull
+	private Boolean active = true;
 
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.MERGE)
 	@JoinTable(name="member_role", joinColumns = @JoinColumn(name = "member_id"),
 	inverseJoinColumns = @JoinColumn(name="role_id"))
 	private Set<Role> roles = new HashSet<>();
@@ -67,7 +70,7 @@ public class Member {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.registrationDate = registrationDate;
-		this.passwordHash = passwordHash;
+		this.password = passwordHash;
 	}
 
 	public Long getId() {
@@ -102,12 +105,12 @@ public class Member {
 		this.registrationDate = registrationDate;
 	}
 	
-	public String getPasswordHash() {
-		return passwordHash;
+	public String getPassword() {
+		return password;
 	}
 	
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Set<Role> getRoles() {
@@ -165,5 +168,12 @@ public class Member {
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
-	
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 }

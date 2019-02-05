@@ -2,11 +2,14 @@ package com.petclinic.bootstrap;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashSet;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import com.petclinic.doctor.Specialization;
 import com.petclinic.model.Doctor;
 import com.petclinic.model.Owner;
 import com.petclinic.model.Pet;
@@ -17,6 +20,7 @@ import com.petclinic.repositories.MemberRepository;
 import com.petclinic.repositories.PetRepository;
 import com.petclinic.repositories.RoleRepository;
 import com.petclinic.repositories.VisitRepository;
+import com.petclinic.services.MemberService;
 import com.petclinic.visit.VisitType;
 
 @Component
@@ -26,15 +30,18 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
 	private RoleRepository roleRepository;
 	private PetRepository petRepository;
 	private VisitRepository visitRepository;
+	private MemberService memberService;
 	
 	
 	public DevBootStrap(MemberRepository memberRepository, RoleRepository roleRepository, 
-						PetRepository petRepository, VisitRepository visitRepository) {
+						PetRepository petRepository, VisitRepository visitRepository,
+						MemberService memberService) {
 		super();
 		this.memberRepository = memberRepository;
 		this.roleRepository = roleRepository;
 		this.petRepository = petRepository;
 		this.visitRepository = visitRepository;
+		this.memberService = memberService;
 	}
 
 	@Override
@@ -45,12 +52,17 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
 	
 	private void initData() {		
 		Role memberRole = new Role("MEMBER", "standard member");
-		Role adminRole = new Role("ADMIN", "administrator role");	
+		Role adminRole = new Role("ADMIN", "administrator role");
+		
+		roleRepository.save(memberRole);
+		roleRepository.save(adminRole);
 		
 		Owner owner1 = new Owner("Jon", "Snow", LocalDate.now(), "1234");
 		owner1.getRoles().add(memberRole);
 		
 		Doctor doctor1 = new Doctor("Leonard", "McCoy", LocalDate.now(), "abcd");
+		doctor1.getSpecializations().add(Specialization.DOG);
+		doctor1.getSpecializations().add(Specialization.FELINE);
 		doctor1.getRoles().add(memberRole);
 		doctor1.getRoles().add(adminRole);
 		
@@ -58,11 +70,11 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
 		memberRole.getMembers().add(doctor1);		
 		adminRole.getMembers().add(doctor1);
 		
-		memberRepository.save(owner1);
-		memberRepository.save(doctor1);
+		memberService.saveMember(owner1, new HashSet<>(Arrays.asList("MEMBER")));
+		//smemberRepository.save(owner1);
+		memberService.saveMember(doctor1, new HashSet<>(Arrays.asList("MEMBER", "ADMIN")));
 		
-		roleRepository.save(memberRole);
-		roleRepository.save(adminRole);
+		
 		
 		Pet doggo1 = new Pet("Doge", LocalDate.now(), PetType.DOG, owner1);
 		petRepository.save(doggo1);
