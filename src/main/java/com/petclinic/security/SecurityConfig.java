@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,12 +12,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.petclinic.services.MemberDetailsService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private MemberDetailsService memberDetailsService;
 	
 	@Bean(name = BeanIds.AUTHENTICATION_MANAGER)
 	@Override
@@ -27,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/css/**", "/", "/index").permitAll()
-								.antMatchers("/member/**").hasRole("USER")
+								.antMatchers("/member/**").hasAuthority("MEMBER")
 								.antMatchers("/h2-console/**").permitAll()
 								.and()
 								.formLogin().loginPage("/login").failureUrl("/login-error");
@@ -36,12 +42,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().disable();		
 	}
 	
+
+	@Bean
+    public DaoAuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+        auth.setUserDetailsService(memberDetailsService);
+        auth.setPasswordEncoder(bCryptPasswordEncoder);
+        return auth;
+    }
+	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
+		auth.authenticationProvider(authenticationProvider());
+		
+		/*auth.inMemoryAuthentication()
 			.withUser("John")
 			.password("{noop}1234")
 			.roles("USER");
+		 */
 									
 	}
 	

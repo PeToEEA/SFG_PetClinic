@@ -39,8 +39,8 @@ public class Doctor extends Owner {
 		super();
 	}
 
-	public Doctor(String firstName, String lastName, LocalDate registrationDate, String passwordHash) {
-		super(firstName, lastName, registrationDate, passwordHash);
+	public Doctor(String email, String firstName, String lastName, LocalDate registrationDate, String passwordHash) {
+		super(email, firstName, lastName, registrationDate, passwordHash);
 	}
 
 	public Set<Visit> getVisits() {

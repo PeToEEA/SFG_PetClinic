@@ -24,8 +24,8 @@ public class Owner extends Member {
 		super();
 	}
 
-	public Owner(String firstName, String lastName, LocalDate registrationDate, String passwordHash) {
-		super(firstName, lastName, registrationDate, passwordHash);
+	public Owner(String email, String firstName, String lastName, LocalDate registrationDate, String passwordHash) {
+		super(email, firstName, lastName, registrationDate, passwordHash);
 	}
 
 	public Set<Pet> getPets() {

@@ -57,10 +57,10 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
 		roleRepository.save(memberRole);
 		roleRepository.save(adminRole);
 		
-		Owner owner1 = new Owner("Jon", "Snow", LocalDate.now(), "1234");
+		Owner owner1 = new Owner("john.snow@gmail.com", "Jon", "Snow", LocalDate.now(), "1234");
 		owner1.getRoles().add(memberRole);
 		
-		Doctor doctor1 = new Doctor("Leonard", "McCoy", LocalDate.now(), "abcd");
+		Doctor doctor1 = new Doctor("mccoy@petclinic.com", "Leonard", "McCoy", LocalDate.now(), "abcd");
 		doctor1.getSpecializations().add(Specialization.DOG);
 		doctor1.getSpecializations().add(Specialization.FELINE);
 		doctor1.getRoles().add(memberRole);

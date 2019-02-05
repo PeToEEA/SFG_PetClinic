@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,7 @@ public class Member {
 	@Nullable
 	private String phone;
 	
-	@Nullable
+	@NotNull
 	private String email;
 	
 	@Nullable
@@ -54,9 +55,9 @@ public class Member {
 	private String password;
 	
 	@NotNull
-	private Boolean active = true;
+	private Boolean active = false;
 
-	@ManyToMany(cascade=CascadeType.MERGE)
+	@ManyToMany(cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
 	@JoinTable(name="member_role", joinColumns = @JoinColumn(name = "member_id"),
 	inverseJoinColumns = @JoinColumn(name="role_id"))
 	private Set<Role> roles = new HashSet<>();
@@ -65,8 +66,9 @@ public class Member {
 		
 	}
 	
-	public Member(String firstName, String lastName, LocalDate registrationDate, String passwordHash) {
+	public Member(String email, String firstName, String lastName, LocalDate registrationDate, String passwordHash) {
 		super();
+		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.registrationDate = registrationDate;
