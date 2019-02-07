@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/css/**", "/", "/index").permitAll()
 								.antMatchers("/member/**").hasAuthority("MEMBER")
 								.antMatchers("/h2-console/**").permitAll()
+								.antMatchers("/register", "/register/**").permitAll()
 								.and()
 								.formLogin().loginPage("/login").failureUrl("/login-error");
 		//For H2 db console
