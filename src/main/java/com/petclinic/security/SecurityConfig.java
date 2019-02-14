@@ -32,17 +32,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/css/**", "/", "/index").permitAll()
+		http.authorizeRequests().antMatchers("/css/**", "css/**", "/", "/index", "/resources/**").permitAll()
 								.antMatchers("/member/**").hasAuthority("MEMBER")
 								.antMatchers("/h2-console/**").permitAll()
 								.antMatchers("/register", "/register/**").permitAll()
 								.and()
 								.formLogin().loginPage("/login").failureUrl("/login-error");
+		
 		//For H2 db console
 		http.csrf().disable();
 		http.headers().frameOptions().disable();		
-	}
-	
+	}	
 
 	@Bean
     public DaoAuthenticationProvider authenticationProvider(){
@@ -54,14 +54,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(authenticationProvider());
-		
-		/*auth.inMemoryAuthentication()
-			.withUser("John")
-			.password("{noop}1234")
-			.roles("USER");
-		 */
-									
-	}
-	
+		auth.authenticationProvider(authenticationProvider());									
+	}	
 }

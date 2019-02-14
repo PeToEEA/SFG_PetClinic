@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <title>Pet clinic - register</title>
 </head>
@@ -9,7 +10,22 @@
 		Register as a new member
 	</h1>
 	
-	<form method="POST">
+	<form action="#" th:action="@{/register/register}" th:object="${registrationCmd}" method="post">
+		
+		<label for="email">email:</label>
+		<input type="email" name="email"/><br>		
+		<label for="firstName">first name:</label>
+		<input type="text" name="firstName"/><br>		
+		<label for="lastName">last name:</label>
+		<input type="text" name="lastName"/><br>		
+		<label for="password">password:</label>
+		<input type="password" name="password"/><br>
+		<label for="passwordRepeat">repeat password:</label>
+		<input type="password" name="repeatPassword"/><br>
+		
+		<button type="submit">
+			Confirm
+		</button>
 		
 	</form>
 
