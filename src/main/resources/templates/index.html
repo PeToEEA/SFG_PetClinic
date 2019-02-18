@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-		th:replace="~{fragments/layout :: layout (~{::body},'home')}">
-    <head>
-        <title>Pet Clinic Home</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head th:replace="fragments/layout :: head (pageTitle='PetClinic :: Home')">
+        <title>PetClinic :: Home</title>
         <meta charset="utf-8" />
     </head>
     <body>
+    	<div th:replace="fragments/layout.html :: mainMenu">
+    	</div>
         <div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">		
             Logged in user: <span sec:authentication="name"></span> |					
             Roles: <span sec:authentication="principal.authorities"></span>				

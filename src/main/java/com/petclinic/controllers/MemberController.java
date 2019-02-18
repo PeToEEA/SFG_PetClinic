@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/member")
 public class MemberController {
 
-	@RequestMapping(value = {"/", "/index"})
+	@RequestMapping(value = {"", "/", "/index"})
 	public String index() {
 		return "/member/index";
 	}
