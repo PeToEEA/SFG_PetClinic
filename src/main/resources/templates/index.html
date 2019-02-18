@@ -15,6 +15,11 @@
                 </form>
             </div>
         </div>
+        
+        <div sec:authorize="hasRole('MEMBER')">
+              this is member
+        </div>
+        
         <h1>Pet Clinic Home</h1>
         <p>Welcome to Pet Clinic.</p>
         <ul>
