@@ -50,9 +50,13 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
 		
 	}
 	
-	private void initData() {		
-		Role memberRole = new Role("MEMBER", "standard member");
-		Role adminRole = new Role("ADMIN", "administrator role");
+	private void initData() {
+		
+		final String ROLE_MEMBER = "ROLE_MEMBER";
+		final String ROLE_ADMIN = "ROLE_ADMIN";		
+		
+		Role memberRole = new Role(ROLE_MEMBER, "standard member");
+		Role adminRole = new Role(ROLE_ADMIN, "administrator role");
 		
 		roleRepository.save(memberRole);
 		roleRepository.save(adminRole);
@@ -70,9 +74,9 @@ public class DevBootStrap implements ApplicationListener<ContextRefreshedEvent> 
 		memberRole.getMembers().add(doctor1);		
 		adminRole.getMembers().add(doctor1);
 		
-		memberService.saveMember(owner1, new HashSet<>(Arrays.asList("MEMBER")));
+		memberService.saveMember(owner1, new HashSet<>(Arrays.asList("ROLE_MEMBER")));
 		//smemberRepository.save(owner1);
-		memberService.saveMember(doctor1, new HashSet<>(Arrays.asList("MEMBER", "ADMIN")));
+		memberService.saveMember(doctor1, new HashSet<>(Arrays.asList("ROLE_MEMBER", "ROLE_ADMIN")));
 		
 		
 		

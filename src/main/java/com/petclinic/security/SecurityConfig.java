@@ -27,13 +27,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean(name = BeanIds.AUTHENTICATION_MANAGER)
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
-	return super.authenticationManagerBean();
+		return super.authenticationManagerBean();
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/css/**", "css/**", "/", "/index", "/resources/**").permitAll()
-								.antMatchers("/member/**").hasAuthority("MEMBER")
+								.antMatchers("/member/**").hasRole("MEMBER")
+								.antMatchers("/admin/member-management/**").hasRole("ADMIN")
 								.antMatchers("/h2-console/**").permitAll()
 								.antMatchers("/register", "/register/**").permitAll()
 								.and()

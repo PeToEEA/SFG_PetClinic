@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
-
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	<head th:replace="fragments/layout :: head (pageTitle='PetClinic :: Member Area')">
+        <title>PetClinic :: Member Area</title>
+        <meta charset="utf-8" />
+    </head>
   <body>
-
-    <h2 th:text="#{welcome}">Welcome</h2>
+	<div th:replace="fragments/layout.html :: mainMenu">
+    </div>
+    <h2 th:text="#{welcome}">Welcome to member area</h2>
     <div class="row">
         <div class="col-md-12">
           <img class="img-responsive" src="../static/resources/images/pets.png" th:src="@{/resources/images/pets.png}"/>
         </div>
     </div>
 
+	<div th:replace="fragments/layout.html :: footer">
+    </div>
   </body>
 
 </html>

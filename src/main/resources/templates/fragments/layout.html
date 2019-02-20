@@ -1,6 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" 
-	  th:fragment="layout (template, menu)">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
   <head th:fragment="head">
 
@@ -27,12 +26,27 @@
 <div th:fragment="mainMenu">
 
 <nav id="mainMenu">
-	<a href="/" th:href="@{/}">Home</a>
-	<a href="/member" th:href="@{/member}">Member area</a>
-	<a href="/vets" th:href="@{/vets}">Veterinarians</a>	
-	<a href="/contact" th:href="@{/contact}">Contact</a>
-	<a href="/login" th:href="@{/login}">Log in</a>
-	<a href="/register" th:href="@{/register}">Register</a>
+	<a href="/" th:href="@{/}">
+		Home
+	</a>
+	<a sec:authorize="hasRole('MEMBER')" href="/member" th:href="@{/member}">
+		Member area
+	</a>
+	<a href="/vets" th:href="@{/vets}">
+		Veterinarians
+	</a>	
+	<a href="/contact" th:href="@{/contact}">
+		Contact
+	</a>
+	<a th:if="${#authorization.expression('isAuthenticated()') == false}" href="/login" th:href="@{/login}">
+		Log in
+	</a>
+	<a th:if="${#authorization.expression('isAuthenticated()') == false}" href="/register" th:href="@{/register}">
+		Register
+	</a>
+	<a sec:authorize="hasRole('ADMIN')" href="/admin/member-management/index" th:href="@{/admin/member-management/index}">
+		Member Management
+	</a>
 </nav>
 
 
@@ -40,6 +54,8 @@
 
 
 <div th:fragment="footer">
+<br>
+<br>
   copyright 2019
 </div>
 

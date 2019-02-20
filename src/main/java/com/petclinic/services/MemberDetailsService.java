@@ -36,7 +36,8 @@ public class MemberDetailsService implements UserDetailsService {
 		for (Role role : member.getRoles()) {
 			grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
 		}
-		User user = new User(member.getEmail(), member.getPassword(), grantedAuthorities);
+		User user = new User(member.getEmail(), member.getPassword(), 
+				true, true, true, true, grantedAuthorities);
 		logger.info("user: " + user.getUsername() + ", password: " + user.getPassword() + ", authorities: " + getAuthoritiesAsString(grantedAuthorities));
 		
 		

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head th:replace="fragments/layout :: head (pageTitle='PetClinic :: Home')">
         <title>PetClinic :: Home</title>
         <meta charset="utf-8" />
@@ -26,5 +27,7 @@
         <ul>
             <li>Go to the <a href="/member/index" th:href="@{/member/index}">secured pages</a></li>
         </ul>
+        <div th:replace="fragments/layout.html :: footer">
+        </div>
     </body>
 </html>

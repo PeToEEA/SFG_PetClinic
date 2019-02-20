@@ -1,3 +1,29 @@
 body {
 	background-color: #99EE66;
 }
+
+/*
+  TABLES  
+*/
+
+.generic-table {
+	width: 100%;
+	background-color: #FFFFFF;
+}
+
+.row {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.row-head {
+	background-color: #00BB00;
+}
+
+.row-body:nth-child(even) {
+	background-color: #DDFFDD;
+}
+
+.row-body:nth-child(odd) {
+	background-color: #BBDDBB;
+}
