@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-<title>Pet clinic - register</title>
+<head th:replace="fragments/layout :: head (pageTitle='PetClinic :: Registration')">
+   <title>PetClinic :: Registration</title>
+   <meta charset="utf-8" />
 </head>
 <body>
-
+	<div th:replace="fragments/layout.html :: mainMenu">
+    </div>
 	<h1>
 		Register as a new member
 	</h1>
@@ -28,6 +30,9 @@
 		</button>
 		
 	</form>
+	
+	<div th:replace="fragments/layout.html :: footer">
+    </div>
 
 </body>
 </html>

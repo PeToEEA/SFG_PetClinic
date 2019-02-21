@@ -11,16 +11,10 @@
         <div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">		
             Logged in user: <span sec:authentication="name"></span> |					
             Roles: <span sec:authentication="principal.authorities"></span>				
-            <div>
-                <form action="#" th:action="@{/logout}" method="post">					
-                    <input type="submit" value="Logout" />
-                </form>
-            </div>
+
+
         </div>
         
-        <div sec:authorize="hasRole('MEMBER')">
-              this is member
-        </div>
         
         <h1>Pet Clinic Home</h1>
         <p>Welcome to Pet Clinic.</p>

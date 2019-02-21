@@ -47,6 +47,9 @@
 	<a sec:authorize="hasRole('ADMIN')" href="/admin/member-management/index" th:href="@{/admin/member-management/index}">
 		Member Management
 	</a>
+	<a th:if="${#authorization.expression('isAuthenticated()')}" href="/logout" th:href="@{/logout}">
+		Log out
+	</a>
 </nav>
 
 
